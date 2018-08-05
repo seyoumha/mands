@@ -63,20 +63,15 @@ app.listen(8000, function(){
 mongoose.connect('mongodb://localhost/mands');
 mongoose.connection.on('connected', () => console.log('connected to db'))
 const Schema = mongoose.Schema;
-const PostSchema = new mongoose.Schema({
-    name: {type: String, required: true, minlength: 4},
-    text: {type: String, required: true},
-    comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
+const RsvpSchema = new mongoose.Schema({
+    name: {type: String, required: true, minlength: 4, maxlength: 32},
+    email: {type: String, required: true},
+    guest_num: {type: Number, required: true},
+    event: {type: String, required: true},
+    msg: {type: String},
 }, {timestamps: true, usePushEach: true})
 
-const CommentSchema = new mongoose.Schema({
-    _post: {type: Schema.Types.ObjectId, ref: 'Post'},
-    name: {type: String, required: true, minlength: 4},
-    text: {type: String, required: true}
-}, {timestamps: true, usePushEach: true});
- mongoose.model('Post', PostSchema)
- mongoose.model('Comment', CommentSchema);
+ mongoose.model('Rsvp', RsvpSchema)
 
- const Post = mongoose.model('Post');
- const Comment = mongoose.model('Comment');
+ const Rsvp = mongoose.model('Rsvp');
 
