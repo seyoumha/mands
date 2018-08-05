@@ -1,0 +1,41 @@
+<% if(typeof(errors) != 'undefined' ) { %>
+    <% for (var x in errors) { %>
+     <h3><%= errors[x].message %></h3>
+    <% } %>
+<% } %>
+<div style='padding: 40px;'>
+    <h1>The Dojo Message Board</h1>
+    <form action='/posts' method='post'>
+        Name: <br/>
+        <input type='text' name='name'><br/><br/>
+        Message: <br/>
+        <textarea name='msg'></textarea><br/><br/>
+        <input type='submit' value='Post message'>
+    </form><br/><br/>
+    <h1>posts</h1>
+    <% posts.forEach(p => {%>
+        <div class='post'>
+            <i><%=p.name%></i><br/>
+            <p><%=p.text%></p>
+        </div>
+        <div class='comments' style='margin-left: 40px'>
+            <h4>comments</h4>
+            <%p.comments.forEach(comment => {%>
+                <i><%=comment.name%></i>
+                <p><%=comment.text%></p>
+                <hr size='1'/>
+            <%})%>
+        </div>
+        <div style='margin-left: 40px;'>
+            <form action='/posts/<%=p.id%>' method='post'>
+                Name:<br/>
+                <input type='text' name='name'><br/>
+                Comment: <br/>
+                <textarea name='text'></textarea><br/><br/>
+                <input type='submit' value='comment'>
+
+            </form>
+        </div>
+    <%})%>
+    
+</div>
