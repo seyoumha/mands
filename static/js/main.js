@@ -419,8 +419,8 @@ $(document).ready(function() {
 	$('#passform').on('submit', function(e){
 		e.preventDefault();
 		let passphrase = $('#passphrase').val()
-		var s = 'thequickbrownfoxjumpoverthelazydog'
-		var p = s[1]+s[28]+s[19]+s[19]+s[30]
+		var s = 'thequickbrownfoxjumpsoverthelazydog'
+		var p = s[20]+s[29]+s[18]+s[32]+s[2]+s[9]+s[5]+s[12]+s[29]+'2019'
 		if(passphrase == p){
 			$('#rsvp_form').show();
 			$('#rsvp-denied').hide();
