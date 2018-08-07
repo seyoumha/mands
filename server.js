@@ -12,48 +12,32 @@ app.set('view engine', 'ejs');
 app.get('/', function(req, res){
     res.render('index');        
 })
+//post to rsvp
+app.post('/rsvp', function(req, res){
+    const new_rsvp = new Rsvp({'name': req.body.name, 'email': req.body.email, 'guest': req.body.guest, 'attend': req.body.attend, 'msg': req.body.message});
+    new_rsvp.save(function(err, myobj){
+        if(err){
+            res.render('index', {errors: new_rsvp.errors});
 
-// app.post('/posts', function(req, res){
-//     const new_post = new Post({name: req.body.name, text: req.body.msg});
-//     new_post.save(function(err){
-//         if(err){
-//             res.render('index', {errors: post.errors});
-
-//         } else{
-//             console.log('sucess')
-//             res.redirect('/')
-//         }
-//     })
-// })
-// app.post('/posts/:id', function(req, res){
-//     Post.findOne({_id: req.params.id}, function(err, post){
-//         console.log(req.body)
-//         const new_comment = new Comment(req.body);
-//         new_comment._post = post._id;
-//         console.log(post.comments)
-//         post.comments.push(new_comment);
-//         new_comment.save(function(err){
-
-//             if(err){
-//                 console.log("comment error", err)
-//                 res.render('index', {errors: new_comment.errors, posts: []});
-//             }else{
-//                 console.log('success')
-//                 post.save(function(err){
-//                     if(!err){
-//                         res.redirect('/');
-//                     }else{
-//                         console.log('post error', err)
-//                         res.render('index', {errors: new_comment.errors, posts: []});
-//                     }
-//                 });
-                
-//             }
-//         })
-//     })
-// })
-
-
+        } else{
+            res.setHeader('Content-Type', 'application/json');
+    		res.send(JSON.stringify({status: 'success'}, null, 3));
+        }
+    })
+})
+//list page
+app.get('/mandslist', function(req, res){
+    Rsvp.find({}, function(err, rsvps){
+        let sum = 0        
+        if(rsvps.length >=1){
+            arr = []
+            rsvps.filter(rsvp => arr.push(rsvp['guest']));
+            sum = arr.reduce((a,c) => a + c);
+        }
+        res.render('guests', {rsvps: rsvps, sum: sum});
+    }).sort({'_id': -1})
+    
+})
 
 app.listen(3000, function(){
     console.log('listening on port 3000')
@@ -61,17 +45,17 @@ app.listen(3000, function(){
 
 //Mongoose
 mongoose.connect('mongodb://localhost/mands');
-mongoose.connection.on('connected', () => console.log('connected to db'))
-const Schema = mongoose.Schema;
-const RsvpSchema = new mongoose.Schema({
+mongoose.connection.on('connected', () => console.log('mongo connected!!'))
+mongoose.connection.on('error', console.error.bind(console, 'connection error:'))
+
+const RsvpSchema = mongoose.Schema({
     name: {type: String, required: true, minlength: 4, maxlength: 32},
     email: {type: String, required: true},
-    guest_num: {type: Number, required: true},
-    event: {type: String, required: true},
+    guest: {type: Number, required: true},
+    attend: {type: String, required: true},
     msg: {type: String},
 }, {timestamps: true, usePushEach: true})
 
  mongoose.model('Rsvp', RsvpSchema)
 
  const Rsvp = mongoose.model('Rsvp');
-

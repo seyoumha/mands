@@ -806,7 +806,6 @@
 						<span class="custom-color">R</span>SVP
 					</h2>
 					<img class="headline_1" src="img/headline_simple.svg" alt="">
-					<p class="sub-heading col-lg-8 offset-lg-2 margin-b-5">I'm not sure about this section but we will talk</p>
 				</div>
 			</div>
 				<div class="row">
@@ -819,7 +818,18 @@
 					</div>
 				</div>
 				<div class="col-md-10 offset-md-1 text-left">
-					<form id="rsvp_form" method="POST" action="sender.php">
+					<form id='passform'>
+						<div class='row'>
+							<div class='form-group col-md-12'>
+								<label for="password" class="sub-heading">Please enter rsvp code</label>
+								<input type='password' class="form-control" id='passphrase'/>
+								<input type="submit" class="button-medium btn btn-default fill-btn"/>
+							</div>
+						</div>
+					</form>
+					<div id='rsvp-denied'>Bummer! The rsvp code you entered is not valid. please try again. </div>
+				
+					<form id="rsvp_form" method="POST" action="/rsvp">
 						<div class="row">
 							<div class="form-group col-md-6">
 								<label for="name">Name</label>
@@ -835,6 +845,7 @@
 								<label for="guest">Number Of Guests</label>
 								<select id="guest" class="form-control" name="guest" required >
 									<option value="">Please Choose</option>
+									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -843,13 +854,10 @@
 								</select>
 							</div>
 							<div class="form-group col-md-6">
-								<label for="attend">Attending The Events</label>
+								<label for="attend">Event</label>
 								<select id="attend" class="form-control" name="attend" required >
 									<option value="">Please Choose</option>
-									<option value="event_1 ">Event 1</option>
-									<option value="event_2">Event 2</option>
-									<option value="event_3">Event 3</option>
-									<option value="event_all">All Event</option>
+									<option value="wedding ">Wedding</option>
 								</select>
 							</div>
 						</div>

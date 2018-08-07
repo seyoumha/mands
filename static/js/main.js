@@ -388,10 +388,12 @@ $(document).ready(function() {
 			// ajax request
 			$.ajax({
 				type: 'POST',
-				url: 'sender.php',
+				url: '/rsvp',
 				data: data,
 				dataType: 'json',
 				success: function(data) {
+						console.log(data, 'data')
+
 					// if send data successfull
 					if (data.status === 'success') {
 						$('.loader').hide();
@@ -413,4 +415,23 @@ $(document).ready(function() {
 			return false;
 		}
 	});
+
+	$('#passform').on('submit', function(e){
+		e.preventDefault();
+		let passphrase = $('#passphrase').val()
+		var s = 'thequickbrownfoxjumpoverthelazydog'
+		var p = s[1]+s[28]+s[19]+s[19]+s[30]
+		if(passphrase == p){
+			$('#rsvp_form').show();
+			$('#rsvp-denied').hide();
+			$('#passform').hide();
+
+		}else{
+			$('#rsvp-denied').show();
+		}
+	});
+	
+	$('#rsvp_form').hide();
+	$('#rsvp-denied').hide();	
+
 });
