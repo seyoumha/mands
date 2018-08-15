@@ -51,10 +51,9 @@ $(document).ready(function() {
 			transition: 'fade2',
 			transitionDuration: 4000,
 			slides: [
-				{ src: './img/main-img.JPG' },
-				{ src: './img/main2.JPG' },
-				{ src: './img/main3.JPG' },
-				{ src: './img/main4.JPG' }
+				{ src: './img/slider1.jpg' },
+				{ src: './img/slider2.jpg' },
+				{ src: './img/slider3.jpg' }
 			]
 		});
 	}
@@ -433,5 +432,12 @@ $(document).ready(function() {
 	
 	$('#rsvp_form').hide();
 	$('#rsvp-denied').hide();	
+
+	$('.read-less').hide()
+
+	$('.read-more, .read-less').on('click', function(e){
+		e.preventDefault();
+		$('.read-more, .read-less').toggle();
+	})
 
 });
