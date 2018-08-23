@@ -433,11 +433,25 @@ $(document).ready(function() {
 	$('#rsvp_form').hide();
 	$('#rsvp-denied').hide();	
 
-	$('.read-less').hide()
+	$('.read-less-meet').hide()
 
-	$('.read-more, .read-less').on('click', function(e){
+	$('.read-more-meet, .read-less-meet').on('click', function(e){
 		e.preventDefault();
-		$('.read-more, .read-less').toggle();
+		$('.read-more-meet, .read-less-meet').toggle();
+	})
+
+	$('.read-less-date').hide()
+
+	$('.read-more-date, .read-less-date').on('click', function(e){
+		e.preventDefault();
+		$('.read-more-date, .read-less-date').toggle();
+	})
+
+	$('.read-less-proposal').hide()
+
+	$('.read-more-proposal, .read-less-proposal').on('click', function(e){
+		e.preventDefault();
+		$('.read-more-proposal, .read-less-proposal').toggle();
 	})
 
 });

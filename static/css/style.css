@@ -32,7 +32,15 @@ Contact: https://themeforest.net/user/regediter
 22 - Boxed Layout
 23 - Scroll Up
 24 - Responsive
-==================================================== */
+
+
+==================CUSTOM STUFF =================*/
+
+#story .collapse.show {
+    display: inline;
+}
+
+
 
 /* 1 Base CSS
 ==================================================== */
