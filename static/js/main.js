@@ -1,457 +1,469 @@
 /* Loader
 	-----------------------------------------------------------------------------------*/
 
-$(window).on('load', function() {
-	'use strict';
-	// Load the page and wait 1s.
-	$('#loader')
-		.delay(1000)
-		.fadeOut('slow');
+$(window).on("load", function() {
+  "use strict";
+  // Load the page and wait 1s.
+  $("#loader")
+    .delay(1000)
+    .fadeOut("slow");
 });
 
 $(document).ready(function() {
-	'use strict';
+  "use strict";
 
-	/* AOS
+  /* AOS
 	-----------------------------------------------------------------------------------*/
 
-	if ($('[data-aos]').length) {
-		AOS.init();
-	}
+  if ($("[data-aos]").length) {
+    AOS.init();
+  }
 
-	/* Video Player
+  /* Video Player
 	-----------------------------------------------------------------------------------*/
-	if ($('#video-wrap').length) {
-		$('#video-wrap').YTPlayer({
-			showControls: false,
-			playerVars: {
-				modestbranding: 0,
-				autoplay: 1,
-				controls: 1,
-				showinfo: 0,
-				wmode: 'transparent',
-				branding: 0,
-				rel: 0,
-				autohide: 0,
-				origin: window.location.origin
-			}
-		});
-	}
+  if ($("#video-wrap").length) {
+    $("#video-wrap").YTPlayer({
+      showControls: false,
+      playerVars: {
+        modestbranding: 0,
+        autoplay: 1,
+        controls: 1,
+        showinfo: 0,
+        wmode: "transparent",
+        branding: 0,
+        rel: 0,
+        autohide: 0,
+        origin: window.location.origin
+      }
+    });
+  }
 
-	/* Vegas Slider
-	-----------------------------------------------------------------------------------*/
-
-	if ($('#slider').length) {
-		$('#slider').vegas({
-			delay: 7000,
-			timer: true,
-			shuffle: true,
-			firstTransition: 'fade2',
-			firstTransitionDuration: 2000,
-			transition: 'fade2',
-			transitionDuration: 4000,
-			slides: [
-				{ src: './img/slider1.jpg' },
-				{ src: './img/slider2.jpg' },
-				{ src: './img/slider3.jpg' }
-			]
-		});
-	}
-
-	/* Scroll Up
-	-----------------------------------------------------------------------------------*/
-	$(window).on('scroll', function() {
-		if ($(this).scrollTop() > 500) {
-			$('.scrollup').fadeIn();
-		} else {
-			$('.scrollup').fadeOut();
-		}
-	});
-
-	$('.scrollup').on('click', function() {
-		$('html, body').animate({ scrollTop: 0 }, 1000);
-		return false;
-	});
-
-	/* Scroll To
+  /* Vegas Slider
 	-----------------------------------------------------------------------------------*/
 
-	/* activate scrollspy menu */
-	$('body').scrollspy({
-		target: '.navbar',
-		offset: 74
-	});
+  if ($("#slider").length) {
+    $("#slider").vegas({
+      delay: 7000,
+      timer: true,
+      shuffle: true,
+      firstTransition: "fade2",
+      firstTransitionDuration: 2000,
+      transition: "fade2",
+      transitionDuration: 4000,
+      slides: [
+        { src: "./img/slider/slider1.jpg" },
+        { src: "./img/slider/slider2.jpg" },
+        { src: "./img/slider/slider3.jpg" }
+      ]
+    });
+  }
 
-	//$.scrollTo works EXACTLY the same way, but scrolls the whole screen
-	$('.navbar-nav a').on('click', function() {
-		$.scrollTo(this.hash, 1000, { offset: -73 });
-	});
+  /* Scroll Up
+	-----------------------------------------------------------------------------------*/
+  $(window).on("scroll", function() {
+    if ($(this).scrollTop() > 500) {
+      $(".scrollup").fadeIn();
+    } else {
+      $(".scrollup").fadeOut();
+    }
+  });
 
-	$('.scroll-link').on('click', function() {
-		$.scrollTo(this.hash, 1000, { offset: -73 });
-	});
+  $(".scrollup").on("click", function() {
+    $("html, body").animate({ scrollTop: 0 }, 1000);
+    return false;
+  });
 
-	/* Simple Count Down 
+  /* Scroll To
 	-----------------------------------------------------------------------------------*/
 
-	if ($('#countdown').length) {
-		// Set the date we're counting down to
-		var countDownDate = Date.parse('27 July 2019 15:30:00');
+  /* activate scrollspy menu */
+  $("body").scrollspy({
+    target: ".navbar",
+    offset: 74
+  });
 
-		// Update the count down every 1 second
-		var x = setInterval(function() {
-			// Get todays date and time
-			var now = new Date().getTime();
+  //$.scrollTo works EXACTLY the same way, but scrolls the whole screen
+  $(".navbar-nav a").on("click", function() {
+    $.scrollTo(this.hash, 1000, { offset: -73 });
+  });
 
-			// Find the distance between now an the count down date
-			var distance = countDownDate - now;
+  $(".scroll-link").on("click", function() {
+    $.scrollTo(this.hash, 1000, { offset: -73 });
+  });
 
-			// Time calculations for days, hours, minutes and seconds
-			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-			var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-			// Display the result in the element with class="countdown"
-			document.getElementById('countdown').innerHTML =
-				'<ul>' +
-				'<li>' +
-				'<h2>' +
-				days +
-				'</h2>' +
-				'<h4>days</h4>' +
-				'</li>' +
-				'<li>' +
-				'<h2>' +
-				hours +
-				'</h2>' +
-				'<h4>hours</h4>' +
-				'</li>' +
-				'<li>' +
-				'<h2>' +
-				minutes +
-				'</h2>' +
-				'<h4>min</h4>' +
-				'</li>' +
-				'<li>' +
-				'<h2>' +
-				seconds +
-				'</h2>' +
-				'<h4>sec</h4>' +
-				'</li>' +
-				'</ul>';
-
-			// If the count down is finished, write some text
-			if (distance < 0) {
-				clearInterval(x);
-				document.getElementById('countdown').innerHTML = 'EXPIRED';
-			}
-		}, 1000);
-	}
-
-	/* Sticky Nav
+  /* Simple Count Down 
 	-----------------------------------------------------------------------------------*/
 
-	$(window).on('scroll', function() {
-		var sliderHeight = $('#slider').outerHeight();
-		var blogHeight = $('#blog-header').outerHeight();
-		var videoHeight = $('#video-bg').outerHeight();
+  if ($("#countdown").length) {
+    // Set the date we're counting down to
+    var countDownDate = Date.parse("27 July 2019 15:30:00");
 
-		/* Full Width */
-		$(window).scrollTop() > sliderHeight
-			? $('#primary-navbar').addClass('affix')
-			: $('#primary-navbar').removeClass('affix');
-		$(window).scrollTop() > blogHeight
-			? $('#primary_navbar_blog').addClass('affix')
-			: $('#primary_navbar_blog').removeClass('affix');
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+      // Get todays date and time
+      var now = new Date().getTime();
 
-		/* Box Layouth */
-		$(window).scrollTop() > sliderHeight
-			? $('#primary-navbar-box').addClass('affix')
-			: $('#primary-navbar-box').removeClass('affix');
-		$(window).scrollTop() > blogHeight
-			? $('#primary_navbar_blog_box').addClass('affix')
-			: $('#primary_navbar_blog_box').removeClass('affix');
+      // Find the distance between now an the count down date
+      var distance = countDownDate - now;
 
-		/* Video Layouth */
-		$(window).scrollTop() > videoHeight
-			? $('#primary-navbar-video').addClass('affix')
-			: $('#primary-navbar-video').removeClass('affix');
-	});
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-	/* Count Up Plugin Settings
+      // Display the result in the element with class="countdown"
+      document.getElementById("countdown").innerHTML =
+        "<ul>" +
+        "<li>" +
+        "<h2>" +
+        days +
+        "</h2>" +
+        "<h4>days</h4>" +
+        "</li>" +
+        "<li>" +
+        "<h2>" +
+        hours +
+        "</h2>" +
+        "<h4>hours</h4>" +
+        "</li>" +
+        "<li>" +
+        "<h2>" +
+        minutes +
+        "</h2>" +
+        "<h4>min</h4>" +
+        "</li>" +
+        "<li>" +
+        "<h2>" +
+        seconds +
+        "</h2>" +
+        "<h4>sec</h4>" +
+        "</li>" +
+        "</ul>";
+
+      // If the count down is finished, write some text
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "EXPIRED";
+      }
+    }, 1000);
+  }
+
+  /* Sticky Nav
 	-----------------------------------------------------------------------------------*/
 
-	var options = {
-		useEasing: true,
-		useGrouping: true,
-		separator: ' ',
-		decimal: '.',
-		prefix: '',
-		suffix: ''
-	};
+  $(window).on("scroll", function() {
+    var sliderHeight = $("#slider").outerHeight();
+    var blogHeight = $("#blog-header").outerHeight();
+    var videoHeight = $("#video-bg").outerHeight();
 
-	// Set the count up numbers
-	var countup_1 = new CountUp('counter-1', 0, 4500, 0, 2.5, options);
-	var countup_2 = new CountUp('counter-2', 0, 153, 0, 2.5, options);
-	var countup_3 = new CountUp('counter-3', 0, 49, 0, 2.5, options);
-	var countup_4 = new CountUp('counter-4', 0, 978, 0, 2.5, options);
+    /* Full Width */
+    $(window).scrollTop() > sliderHeight
+      ? $("#primary-navbar").addClass("affix")
+      : $("#primary-navbar").removeClass("affix");
+    $(window).scrollTop() > blogHeight
+      ? $("#primary_navbar_blog").addClass("affix")
+      : $("#primary_navbar_blog").removeClass("affix");
 
-	var $CounterStart = $('#countup');
+    /* Box Layouth */
+    $(window).scrollTop() > sliderHeight
+      ? $("#primary-navbar-box").addClass("affix")
+      : $("#primary-navbar-box").removeClass("affix");
+    $(window).scrollTop() > blogHeight
+      ? $("#primary_navbar_blog_box").addClass("affix")
+      : $("#primary_navbar_blog_box").removeClass("affix");
 
-	// If scroll get to the waypoint, the Count up start
-	$CounterStart.waypoint(
-		function(direction) {
-			if (direction === 'down') {
-				countup_1.start();
-				countup_2.start();
-				countup_3.start();
-				countup_4.start();
-			}
-		},
-		{
-			offset: '100%'
-		}
-	);
+    /* Video Layouth */
+    $(window).scrollTop() > videoHeight
+      ? $("#primary-navbar-video").addClass("affix")
+      : $("#primary-navbar-video").removeClass("affix");
+  });
 
-	/* Isotope Plugin Settings
+  /* Count Up Plugin Settings
 	-----------------------------------------------------------------------------------*/
 
-	if ($('.grid').length) {
-		// init Isotope
-		var $grid = $('.grid').isotope({
-			itemSelector: '.grid-item',
-			percentPosition: false,
-			masonry: {
-				// use outer width of grid-sizer for columnWidth
-				columnWidth: '.grid-item'
-			}
-		});
+  var options = {
+    useEasing: true,
+    useGrouping: true,
+    separator: " ",
+    decimal: ".",
+    prefix: "",
+    suffix: ""
+  };
 
-		$grid.imagesLoaded().progress(function() {
-			$grid.isotope('layout');
-		});
-	}
+  // Set the count up numbers
+  var countup_1 = new CountUp("counter-1", 0, 4500, 0, 2.5, options);
+  var countup_2 = new CountUp("counter-2", 0, 153, 0, 2.5, options);
+  var countup_3 = new CountUp("counter-3", 0, 49, 0, 2.5, options);
+  var countup_4 = new CountUp("counter-4", 0, 978, 0, 2.5, options);
 
-	// filter functions
-	var filterFns = {
-		// show if name ends with -ium
-		ium: function() {
-			var name = $(this)
-				.find('.name')
-				.text();
-			return name.match(/ium$/);
-		}
-	};
+  var $CounterStart = $("#countup");
 
-	// bind filter button click
-	$('.filters-button-group').on('click', 'button', function() {
-		var filterValue = $(this).attr('data-filter');
-		// use filterFn if matches value
-		filterValue = filterFns[filterValue] || filterValue;
-		$grid.isotope({ filter: filterValue });
-	});
-	// change is-checked class on buttons
-	$('.button-group').each(function(i, buttonGroup) {
-		var $buttonGroup = $(buttonGroup);
-		$buttonGroup.on('click', 'button', function() {
-			$buttonGroup.find('.is-checked').removeClass('is-checked');
-			$(this).addClass('is-checked');
-		});
-	});
+  // If scroll get to the waypoint, the Count up start
+  $CounterStart.waypoint(
+    function(direction) {
+      if (direction === "down") {
+        countup_1.start();
+        countup_2.start();
+        countup_3.start();
+        countup_4.start();
+      }
+    },
+    {
+      offset: "100%"
+    }
+  );
 
-	/* Magnific Popup Plugin Settings
+  /* Isotope Plugin Settings
 	-----------------------------------------------------------------------------------*/
 
-	/* image */
-	$('.popup-gallery').magnificPopup({
-		delegate: 'a',
-		type: 'image',
-		tLoading: 'Loading image #%curr%...',
-		mainClass: 'mfp-img-mobile',
-		gallery: {
-			enabled: true,
-			navigateByImgClick: true,
-			preload: [0, 6] // Will preload 0 - before current, and 1 after the current image
-		},
-		image: {
-			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
-			titleSrc: function(item) {
-				return item.el.attr('title');
-			}
-		}
-	});
+  if ($(".grid").length) {
+    // init Isotope
+    var $grid = $(".grid").isotope({
+      itemSelector: ".grid-item",
+      percentPosition: false,
+      masonry: {
+        // use outer width of grid-sizer for columnWidth
+        columnWidth: ".grid-item"
+      }
+    });
 
-	/* youtube video, vimeo, google maps */
-	$('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
-		type: 'iframe',
-		mainClass: 'mfp-fade',
-		removalDelay: 160,
-		preloader: false,
-		fixedContentPos: false
-	});
+    $grid.imagesLoaded().progress(function() {
+      $grid.isotope("layout");
+    });
+  }
 
-	/* Bootstrap Collapse
+  // filter functions
+  var filterFns = {
+    // show if name ends with -ium
+    ium: function() {
+      var name = $(this)
+        .find(".name")
+        .text();
+      return name.match(/ium$/);
+    }
+  };
+
+  // bind filter button click
+  $(".filters-button-group").on("click", "button", function() {
+    var filterValue = $(this).attr("data-filter");
+    // use filterFn if matches value
+    filterValue = filterFns[filterValue] || filterValue;
+    $grid.isotope({ filter: filterValue });
+  });
+  // change is-checked class on buttons
+  $(".button-group").each(function(i, buttonGroup) {
+    var $buttonGroup = $(buttonGroup);
+    $buttonGroup.on("click", "button", function() {
+      $buttonGroup.find(".is-checked").removeClass("is-checked");
+      $(this).addClass("is-checked");
+    });
+  });
+
+  /* Magnific Popup Plugin Settings
 	-----------------------------------------------------------------------------------*/
 
-	(function() {
-		$('.panel').on('show.bs.collapse hide.bs.collapse', function(e) {
-			if (e.type === 'show') {
-				$(this).addClass('active');
-			} else {
-				$(this).removeClass('active');
-			}
-		});
-	}.call(this));
+  /* image */
+  $(".popup-gallery").magnificPopup({
+    delegate: "a",
+    type: "image",
+    tLoading: "Loading image #%curr%...",
+    mainClass: "mfp-img-mobile",
+    gallery: {
+      enabled: true,
+      navigateByImgClick: true,
+      preload: [0, 6] // Will preload 0 - before current, and 1 after the current image
+    },
+    image: {
+      tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+      titleSrc: function(item) {
+        return item.el.attr("title");
+      }
+    }
+  });
 
-	/* Owl Carousel
+  /* youtube video, vimeo, google maps */
+  $(".popup-youtube, .popup-vimeo, .popup-gmaps").magnificPopup({
+    type: "iframe",
+    mainClass: "mfp-fade",
+    removalDelay: 160,
+    preloader: false,
+    fixedContentPos: false
+  });
+
+  /* Bootstrap Collapse
 	-----------------------------------------------------------------------------------*/
 
-	$('#gift-carousel').owlCarousel({
-		loop: true,
-		margin: 10,
-		touchDrag: true,
-		responsiveClass: true,
-		responsive: {
-			0: {
-				items: 1,
-				nav: false
-			},
-			600: {
-				items: 2,
-				nav: false
-			},
-			1000: {
-				items: 4,
-				nav: false,
-				loop: false
-			}
-		}
-	});
+  (function() {
+    $(".panel").on("show.bs.collapse hide.bs.collapse", function(e) {
+      if (e.type === "show") {
+        $(this).addClass("active");
+      } else {
+        $(this).removeClass("active");
+      }
+    });
+  }.call(this));
 
-	$('#comment-carousel').owlCarousel({
-		animateOut: 'slideOutDown',
-		animateIn: 'flipInX',
-		touchDrag: true,
-		autoplay: true,
-		loop: true,
-		items: 1,
-		margin: 30,
-		stagePadding: 30,
-		smartSpeed: 450
-	});
+  /* Owl Carousel
+	-----------------------------------------------------------------------------------*/
 
-	/* RSVP FORM
+  $("#gift-carousel").owlCarousel({
+    loop: true,
+    margin: 10,
+    touchDrag: true,
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 1,
+        nav: false
+      },
+      600: {
+        items: 2,
+        nav: false
+      },
+      1000: {
+        items: 4,
+        nav: false,
+        loop: false
+      }
+    }
+  });
+
+  $("#comment-carousel").owlCarousel({
+    animateOut: "slideOutDown",
+    animateIn: "flipInX",
+    touchDrag: true,
+    autoplay: true,
+    loop: true,
+    items: 1,
+    margin: 30,
+    stagePadding: 30,
+    smartSpeed: 450
+  });
+
+  /* RSVP FORM
     -----------------------------------------------------------------------------------*/
 
-	// form validation
-	$('#rsvp_form').validate({
-		rules: {
-			name: {
-				required: true,
-				minlength: 4
-			},
-			email: 'required',
+  // form validation
+  $("#rsvp_form").validate({
+    rules: {
+      name: {
+        required: true,
+        minlength: 4
+      },
+      email: "required",
 
-			guest: {
-				required: true
-			},
-			attend: {
-				required: true
-			},
-			message: {
-				maxlength: 200
-			}
-		},
-		messages: {
-			name: {
-				required: 'Please enter your name',
-				minlength: jQuery.validator.format('At least {0} characters required!')
-			},
-			email: 'Please enter your email',
-			guest: 'Please select number of guest',
-			attend: 'Please select event',
-			message: {
-				maxlength: jQuery.validator.format('Please enter no more than {0} characters!')
-			}
-		},
+      guest: {
+        required: true
+      },
+      attend: {
+        required: true
+      },
+      message: {
+        maxlength: 200
+      }
+    },
+    messages: {
+      name: {
+        required: "Please enter your name",
+        minlength: jQuery.validator.format("At least {0} characters required!")
+      },
+      email: "Please enter your email",
+      guest: "Please select number of guest",
+      attend: "Please select event",
+      message: {
+        maxlength: jQuery.validator.format(
+          "Please enter no more than {0} characters!"
+        )
+      }
+    },
 
-		// ajax request
-		submitHandler: function(form) {
-			var data = $(form).serialize();
-			var form = $('#rsvp_form');
+    // ajax request
+    submitHandler: function(form) {
+      var data = $(form).serialize();
+      var form = $("#rsvp_form");
 
-			// loader
-			$('.loader').show();
+      // loader
+      $(".loader").show();
 
-			// ajax request
-			$.ajax({
-				type: 'POST',
-				url: '/rsvp',
-				data: data,
-				dataType: 'json',
-				success: function(data) {
-						console.log(data, 'data')
+      // ajax request
+      $.ajax({
+        type: "POST",
+        url: "/rsvp",
+        data: data,
+        dataType: "json",
+        success: function(data) {
+          console.log(data, "data");
 
-					// if send data successfull
-					if (data.status === 'success') {
-						$('.loader').hide();
-						$(form).fadeOut('slow');
-						setTimeout(function() {
-							$('.form-success').show('slow');
-						}, 300);
+          // if send data successfull
+          if (data.status === "success") {
+            $(".loader").hide();
+            $(form).fadeOut("slow");
+            setTimeout(function() {
+              $(".form-success").show("slow");
+            }, 300);
 
-						// if send data something wrong
-					} else if (data.status === 'error') {
-						$('.loader').hide();
-						$(form).fadeOut('slow');
-						setTimeout(function() {
-							$('.form-error').show('slow');
-						}, 300);
-					}
-				}
-			});
-			return false;
-		}
-	});
+            // if send data something wrong
+          } else if (data.status === "error") {
+            $(".loader").hide();
+            $(form).fadeOut("slow");
+            setTimeout(function() {
+              $(".form-error").show("slow");
+            }, 300);
+          }
+        }
+      });
+      return false;
+    }
+  });
 
-	$('#passform').on('submit', function(e){
-		e.preventDefault();
-		let passphrase = $('#passphrase').val()
-		var s = 'thequickbrownfoxjumpsoverthelazydog'
-		var p = s[20]+s[29]+s[18]+s[32]+s[2]+s[9]+s[5]+s[12]+s[29]+'2019'
-		if(passphrase == p){
-			$('#rsvp_form').show();
-			$('#rsvp-denied').hide();
-			$('#passform').hide();
+  $("#passform").on("submit", function(e) {
+    e.preventDefault();
+    let passphrase = $("#passphrase").val();
+    var s = "thequickbrownfoxjumpsoverthelazydog";
+    var p =
+      s[20] +
+      s[29] +
+      s[18] +
+      s[32] +
+      s[2] +
+      s[9] +
+      s[5] +
+      s[12] +
+      s[29] +
+      "2019";
+    if (passphrase == p) {
+      $("#rsvp_form").show();
+      $("#rsvp-denied").hide();
+      $("#passform").hide();
+    } else {
+      $("#rsvp-denied").show();
+    }
+  });
 
-		}else{
-			$('#rsvp-denied').show();
-		}
-	});
-	
-	$('#rsvp_form').hide();
-	$('#rsvp-denied').hide();	
+  $("#rsvp_form").hide();
+  $("#rsvp-denied").hide();
 
-	$('.read-less-meet').hide()
+  $(".read-less-meet").hide();
 
-	$('.read-more-meet, .read-less-meet').on('click', function(e){
-		e.preventDefault();
-		$('.read-more-meet, .read-less-meet').toggle();
-	})
+  $(".read-more-meet, .read-less-meet").on("click", function(e) {
+    e.preventDefault();
+    $(".read-more-meet, .read-less-meet").toggle();
+  });
 
-	$('.read-less-date').hide()
+  $(".read-less-date").hide();
 
-	$('.read-more-date, .read-less-date').on('click', function(e){
-		e.preventDefault();
-		$('.read-more-date, .read-less-date').toggle();
-	})
+  $(".read-more-date, .read-less-date").on("click", function(e) {
+    e.preventDefault();
+    $(".read-more-date, .read-less-date").toggle();
+  });
 
-	$('.read-less-proposal').hide()
+  $(".read-less-proposal").hide();
 
-	$('.read-more-proposal, .read-less-proposal').on('click', function(e){
-		e.preventDefault();
-		$('.read-more-proposal, .read-less-proposal').toggle();
-	})
-
+  $(".read-more-proposal, .read-less-proposal").on("click", function(e) {
+    e.preventDefault();
+    $(".read-more-proposal, .read-less-proposal").toggle();
+  });
 });
